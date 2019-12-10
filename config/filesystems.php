@@ -64,6 +64,63 @@ return [
             'url' => env('AWS_URL'),
         ],
 
+        'adminuploadsactive' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/adminuploads/actives'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
+        'adminuploadsarchived' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/adminuploads/archives'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
+        'templates' => [
+            'driver' => 'local',
+            'root' => resource_path('views/templates'),
+        ],
+
+        'javascripts' => [
+            'driver' => 'local',
+            'root' => public_path('js/templates'),
+        ],
+
+        'css' => [
+            'driver' => 'local',
+            'root' => public_path('css/templates'),
+        ],
+
+        'temporary' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/temporary'),
+            'url' => env('APP_URL').'/temporary',
+            'visibility' => 'public',
+        ],
+
+        'slider' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/slider'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
+        'products' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/products/items'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
+        'product_category' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/products/category'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
     ],
 
 ];

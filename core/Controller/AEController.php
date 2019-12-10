@@ -5,6 +5,8 @@ namespace Core\Controller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use Core\Model\Page;
+
 class AEController extends Controller
 {
     /**
