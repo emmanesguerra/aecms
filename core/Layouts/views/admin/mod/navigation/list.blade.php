@@ -54,6 +54,10 @@ Navigation
                                 <navigation-form v-bind:info="model"
                                                  v-bind:errors="errors">
                                 </navigation-form>
+                                <div class="box-footer">
+                                    <button @click='reset' type="button" class="btn btn-default">Discard Changes</button>
+                                    <button @click='submit' type="button" class="btn btn-primary">Submit</button>
+                                </div>
                             </form>
                         </div>
                     </div>
