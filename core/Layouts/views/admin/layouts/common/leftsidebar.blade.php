@@ -13,7 +13,7 @@
             <li><a href="{{ route('module.index') }}"><i class="fa fa-cube"></i> <span>Modules</span></a></li>
             <li><a href="{{ route('user.index') }}"><i class="fa fa-user-o"></i> <span>Users</span></a></li>
             <li><a href="{{ route('permission.index') }}"><i class="fa fa-unlock-alt"></i> <span>User Permissions</span></a></li>
-            <li><a href="{{ route('navigation.index') }}"><i class="fa fa-rss"></i> <span>Navigations</span></a></li>
+            <li><a href="{{ route('navigation.index') }}"><i class="fa fa-bars"></i> <span>Navigations</span></a></li>
         </ul>
 
         <ul class="sidebar-menu tree" data-widget="tree">
