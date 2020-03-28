@@ -20,39 +20,9 @@ Pages
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="list">
                         <div class="box-body">
-                            <div class="dataTables_wrapper form-inline dt-bootstrap">
-                                <table id="pagelists" class="table table-hover dataTable" role="grid" aria-describedby="pagelists_info" style="width: 100%">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Name</th>
-                                            <th>Url</th>
-                                            <th>Title</th>
-                                            <th>Description</th>
-                                            <th>Template</th>
-                                            <th>Type</th>
-                                            <th>Date Created</th>
-                                            <th>Date Updated</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Name</th>
-                                            <th>Url</th>
-                                            <th>Title</th>
-                                            <th>Description</th>
-                                            <th>Template</th>
-                                            <th>Type</th>
-                                            <th>Date Created</th>
-                                            <th>Date Updated</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
+                            <div id="pagelists" class="dataTables_wrapper form-inline dt-bootstrap">
+                                <page-lists v-bind:pagelists="pages" 
+                                            v-on:add-entry="addEntry"/>
                             </div>
                         </div>
                     </div>
@@ -71,6 +41,7 @@ Pages
                                 
                                 <panel-form  v-for="panel in panels"
                                     v-bind:panel="panel"
+                                    v-bind:key="panel.id"
                                     v-bind:javascripts="model.javascripts"
                                     v-bind:css="model.styles"
                                     v-bind:mainpanels="mainpanels"
@@ -117,6 +88,7 @@ Pages
 
 <script>
     var templates = {!! json_encode($data['templates']) !!};
+    var pagelists = {!! json_encode($data['pages']) !!};
     var javascripts = {!! json_encode($data['javascripts']) !!};
     var styles = {!! json_encode($data['styles']) !!};
     var mainpanels = {!! json_encode($data['mainpanels']) !!};

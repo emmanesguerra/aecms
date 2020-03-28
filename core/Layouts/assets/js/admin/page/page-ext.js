@@ -38,29 +38,3 @@ showmodal = function (id) {
     $('#idtobedeleted').html(id);
     $('#modal-danger').modal('show');
 }
-
-pagetable = $('#pagelists').DataTable({
-    processing: true,
-    "ajax": pagedataurl,
-    "aaSorting": [],
-    "columns": [
-        {"data": "id"},
-        {"data": "name"},
-        {"data": "url"},
-        {"data": "title"},
-        {"data": "description"},
-        {"data": "template"},
-        {"data": "type"},
-        {"data": "created_at"},
-        {"data": "updated_at"},
-        {
-            width: "5%",
-            bSearchable: false,
-            bSortable: false,
-            mRender: function (data, type, full) {
-                return '<button onclick="proccessdata(' + full.id + ', `get`)" class="btn btn-primary btn-xs"><i class="fa fa-pencil "></i></button>&nbsp;&nbsp;'
-                        + '<button onclick="showmodal(' + full.id + ')" class="btn btn-primary btn-xs"><i class="fa fa-trash"></i></button>'
-            }
-        }
-    ]
-});

@@ -22,6 +22,9 @@ class PageController extends Controller
      */
     public function index()
     {
+        $pages = Page::select('id', 'name', 'url', 'title', 'description',
+                            'template', 'type', 'created_at', 'updated_at', 
+                            'lft', 'rgt', 'lvl')->orderBy('lft', 'asc')->orderBy('id', 'asc')->get();
         $files = Storage::disk('templates')->allFiles();
         $javascripts = Storage::disk('javascripts')->allFiles();
         $styles = Storage::disk('css')->allFiles();
@@ -29,6 +32,7 @@ class PageController extends Controller
         $regular = Panel::regular()->get(['id', 'name']);
         
         $data = [
+            'pages' => $pages,
             'templates' => [],
             'javascripts' => [],
             'styles' => [],

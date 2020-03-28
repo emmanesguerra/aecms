@@ -15,6 +15,8 @@ Vue.component('multiselect', Multiselect);
 Vue.component('editor', Editor );
 Vue.component('page-form', require('./Form.vue').default);
 Vue.component('panel-form', require('./Panel2.vue').default);
+Vue.component('page-lists', require('./List.vue').default);
+Vue.component('page-lists-row', require('./ListRow.vue').default);
 
 window.pageformvue = new Vue({
     el: '#pageform',
@@ -94,5 +96,28 @@ window.pageformvue = new Vue({
                 }
             });
         }
+    }
+});
+
+window.pagelistvue = new Vue({
+    el: '#pagelists',
+    data: {
+        pages: pagelists
+    },
+    methods: {
+        addEntry (data) {
+            this.pages.push({
+               'id': null, 
+               'name': null, 
+               'url': null, 
+               'title': null, 
+               'description': null,
+               'template': null, 
+               'type': null, 
+               'created_at': null, 
+               'updated_at': null,
+               'editable': true
+            });
+        },
     }
 });

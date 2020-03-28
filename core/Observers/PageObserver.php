@@ -19,10 +19,6 @@ class PageObserver {
     {
         $temp = $page->template;
         $file = Storage::disk('templates')->get($page->template);
-        $pattern = '{{Main}}';
-        $pos1  = stripos($pattern, $file);
-        
-        $page->type = ($pos1 === false) ? 'Index': 'Main';
         $page->template_html = $file;
         $page->created_by = Auth::id();
     }
