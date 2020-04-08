@@ -24,14 +24,14 @@ class HierarchicalDB {
         $this->table = $table;
     }
 
-    public static function rebuild_tree($parent_id, $left) {
+    public function rebuild_tree($parent_id, $left) {
         // the right value of this node is the left value + 1   
         $right = $left + 1;
 
         // get all children of this node   
         $result = DB::table($this->table)
                         ->select('id')
-                        ->where('parent_id', $parent_id)
+                        ->where('id', $parent_id)
                         ->get();
         
         foreach ($result as $res => $data) {
@@ -39,21 +39,21 @@ class HierarchicalDB {
             // child of this node   
             // $right is the current right value, which is   
             // incremented by the rebuild_tree function  
-            $right = rebuild_tree($data->id, $right);
+            $right = $this->rebuild_tree($data->id, $right);
         }
 
         
         // we've got the left value, and now that we've processed   
         // the children of this node we also know the right value  
         DB::table($this->table)
-                ->update(['lft' => $left, 'rgt' => $right])
-                ->where('parent_id', $parent_id);
+                ->where('parent_id', $parent_id)
+                ->update(['lft' => $left, 'rgt' => $right]);
             
         // return the right value of this node + 1 
         return $right + 1;
     }
     
-    public static function update_left_rigth($parent_id)
+    public function update_left_right($parent_id)
     {
         DB::table($this->table)
                 ->update('rgt', DB::raw('rgt+2'))
@@ -64,11 +64,26 @@ class HierarchicalDB {
                 ->where('lft', '>', $parent_id);
     }
     
-    public static function insert_to_tree($id, $left)
+    public function insert_to_tree($id, $left)
     {
         $right = $left + 1;
         DB::table($this->table)
                 ->update(['lft' => $left, 'rgt' => $right])
                 ->where('id', $id);
+    }
+    
+    public function last_right()
+    {
+        $rgt = DB::table($this->table)
+                ->select('rgt')
+                ->orderBy('rgt', 'desc')
+                ->limit(1)
+                ->first();
+        
+        if($rgt) {
+            return $rgt->rgt;
+        } else {
+            return 1;
+        }
     }
 }

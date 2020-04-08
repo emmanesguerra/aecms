@@ -97,6 +97,7 @@ Pages
     var pageindexurl = "{{ route('page.index') }}";
     var pagedataurl = "{{ route('page.data') }}";
     var pagetemplateurl = "{{ route('page.template') }}";
+    var pagesavesimple = "{{ route('page.storesimple') }}";
 </script>
 
 <script src="{{ asset('AdminLTE-2.4.3/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>

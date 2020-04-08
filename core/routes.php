@@ -59,6 +59,7 @@ Route::prefix('admin')->group(function () {
             Route::post('/template', '\Core\Controller\Page\PageController@template')->name('page.template');
             Route::get('/{id}', '\Core\Controller\Page\PageController@show')->name('page.show');
             Route::post('/', '\Core\Controller\Page\PageController@store')->name('page.store');
+            Route::post('/simple', '\Core\Controller\Page\PageController@storesimple')->name('page.storesimple');
             Route::put('/', '\Core\Controller\Page\PageController@update')->name('page.update');
             Route::delete('/{id}', '\Core\Controller\Page\PageController@destroy')->name('page.destroy');
         });

@@ -16,6 +16,7 @@ class Page extends Model implements Auditable
         'description',
         'javascripts',
         'css',
+        'type',
         'template',
         'template_html'
     ];

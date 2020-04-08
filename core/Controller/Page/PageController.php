@@ -125,6 +125,38 @@ class PageController extends Controller
             'type' => 'success'], 201);
     }
     
+    public function storesimple(Request $request)
+    {        
+        $data = $request->all();
+        
+        $page = new Page();
+        $page::unsetEventDispatcher();
+        $page->fill($data);
+        $page->parent_id = 0;
+        $page->lvl = 0;
+        
+        $page->javascripts = ['1'];
+        $page->css = ['1'];
+        $page->template = '';
+        $page->template_html = '';
+        
+        $page->created_by = \Illuminate\Support\Facades\Auth::user()->id;
+        $page->updated_by = \Illuminate\Support\Facades\Auth::user()->id;
+        
+        $hdb = new HierarchicalDB($page->getTable());
+        $page->lft = $hdb->last_right() + 1;
+        $page->rgt = $hdb->last_right() + 2;
+                
+        $page->save();
+        
+        return response([
+            'id'=>$page->id, 
+            'icon'=> 'icon glyphicon glyphicon-ok-sign',
+            'title'=> 'Action Completed',
+            'message' => 'A new page has been created <br />', 
+            'type' => 'success'], 201);
+    }
+    
     private function savePanels($panel, $key, $pdata)
     {
         if($panel['isnew']) {
@@ -217,7 +249,12 @@ class PageController extends Controller
      */
     public function destroy($id)
     {
-        Page::destroy($id);
+        $page = Page::find($id);
+        
+        $hdb = new HierarchicalDB($page->getTable());
+        $hdb->rebuild_tree($page->parent_id, $page->lft);
+        
+        $page->delete();
         
         return response([],204);
     }

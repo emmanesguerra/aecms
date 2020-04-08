@@ -1,13 +1,13 @@
 <template>
     <tr v-if="page.editable">
         <td>X</td>
-        <td><input type='text' v-model='newentry.name' /></td>
-        <td><input type='text' v-model='newentry.url' /></td>
-        <td><input type='text' v-model='newentry.title' /></td>
-        <td><input type='text' v-model='newentry.description' /></td>
+        <td><input type='text' class="form-control input-sm" v-model='newentry.name' /></td>
+        <td><input type='text' class="form-control input-sm" v-model='newentry.url' /></td>
+        <td><input type='text' class="form-control input-sm" v-model='newentry.title' /></td>
+        <td><input type='text' class="form-control input-sm" v-model='newentry.description' /></td>
         <td></td>
         <td>
-            <select v-model='newentry.type'>
+            <select v-model='newentry.type' class="form-control input-sm">
                 <option value='Head'>Head</option>
                 <option value='Web Page'>Web Page</option>
             </select>
@@ -46,9 +46,7 @@
                     title: null,
                     description: null,
                     template: null,
-                    type: null,
-                    created_at: null,
-                    updated_at: null,
+                    type: null
                 }
             };
         },
@@ -69,8 +67,21 @@
             removeData () {
                 showmodal(this.page.id);
             },
-            save () {
+            addSubEntry () {
                 
+            },
+            save () {
+                axios({
+                   url: pagesavesimple,
+                   method: 'post',
+                   data: this.newentry
+                }).then(function (response) {
+                    location.reload();
+                }).catch(function (error) {
+                    if (error.response) {          
+                        proccessnoti(error.response);
+                    }
+                });
             }
         }
     }
